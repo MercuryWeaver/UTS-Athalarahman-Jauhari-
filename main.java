@@ -13,11 +13,25 @@ public class main {
 
             boolean TakeOrder = true;
             MenuItem.printMenu();
-            
+
             while (TakeOrder) {
+                int MenuID, Quantity;
                 System.out.println("Enter the ID of the menu item you want to order: ");
-                customer.placeOrder(0, 0);
+                MenuID = scanner.nextInt();
+                System.out.println("Enter the quantity: ");
+                Quantity = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline character
+                customer.placeOrder(MenuID, Quantity);
+                System.out.println("Do you want to add more items? (1/0)");
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline character
+                if (choice == 0) {
+                    TakeOrder = false;
+                }
             }
+
+            customer.printOrder();
+            customer.Checkout();
 
         }
     }

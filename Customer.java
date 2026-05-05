@@ -8,6 +8,7 @@ public class Customer {
 
     public void placeOrder(int MenuId, int quantity){
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Do you want to create a new order (1) or add to an existing order (2)?");
         int choice = scanner.nextInt();
         Orderlist localOrderList;
         switch (choice) {
@@ -53,7 +54,12 @@ public class Customer {
     }
 
     public void Checkout(){
-
+        double total = 0;
+        for (Orderlist orderlist : Orders) {
+            total += orderlist.getTotal();
+        }
+        System.out.println("Total: " + total);
+        //simpen customernya di rekor transaksi dah
     }
 
 
