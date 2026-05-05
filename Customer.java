@@ -62,7 +62,7 @@ public class Customer {
         System.out.println("Customer: " + nama + ", Table: " + meja);
         for (int i = 0; i < Orders.size(); i++) {
             Orderlist orderlist = Orders.get(i);
-            System.out.println("Order " + (i + 1) + ":");
+            System.out.println("Order " + (i) + ":");
             for (Order order : orderlist.orders) {
                 order.printOrder();
             }
