@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class Customer {
     private String nama;
+    private static ArrayList<Customer> CustomerRecord = new ArrayList<>();
     String meja;
     private ArrayList<Orderlist> Orders;
 
@@ -26,7 +27,20 @@ public class Customer {
                 System.out.println("Please pick the ID of the order you want to add to:");
                 int orderId = scanner.nextInt();
                 localOrderList = Orders.get(orderId);
-                localOrderList.orders.add(new Order(MenuItem.getMenuItemById(MenuId), quantity));
+
+                if (localOrderList == null) {
+                    System.out.println("Invalid order ID.");
+                    return;
+                }
+
+                for (Order order : localOrderList.orders) {
+                    if (order.item.ID == MenuId) {
+                        order.quantity += quantity;
+                        return;
+                    }
+                }
+                Order NewOrder = new Order(MenuItem.getMenuItemById(MenuId), quantity);
+                localOrderList.orders.add(NewOrder);
                 break;
             default:
                 System.out.println("Invalid choice.");
@@ -41,15 +55,18 @@ public class Customer {
         this.nama = nama;
         this.meja = meja;
         this.Orders = new ArrayList<>();
+        CustomerRecord.add(this);
     }
 
     public void printOrder(){
+        System.out.println("Customer: " + nama + ", Table: " + meja);
         for (int i = 0; i < Orders.size(); i++) {
             Orderlist orderlist = Orders.get(i);
             System.out.println("Order " + (i + 1) + ":");
             for (Order order : orderlist.orders) {
                 order.printOrder();
             }
+            System.out.println("Total: " + orderlist.getTotal());
         }
     }
 
