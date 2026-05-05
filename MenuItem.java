@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 public class MenuItem {
-    static int counter = 0;
+    private static int counter = 0;
     String nama;
     double harga;
     int ID;
     private static ArrayList<MenuItem> listMenu = new ArrayList<>();
 
     static {
-        listMenu.add(new MenuItem("Nasi Goreng", 15000));
-        listMenu.add(new MenuItem("Mie Goreng", 12000));
+        new MenuItem("Nasi Goreng", 15000);
+        new MenuItem("Mie Goreng", 12000);
     }
 
     public MenuItem(String nama, double harga) {

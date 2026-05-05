@@ -9,23 +9,27 @@ public class Customer {
     public void placeOrder(int MenuId, int quantity){
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
+        Orderlist localOrderList;
         switch (choice) {
             case 1:
-                Orders.add(new Orderlist());
+                localOrderList = new Orderlist();
+                Orders.add(localOrderList);
+                localOrderList.orders.add(new Order(MenuItem.getMenuItemById(MenuId), quantity));
                 break;
             case 2:
                 if (Orders.isEmpty()) {
                     System.out.println("No orders to add to. Please create an order first.");
                     return;
                 }
-
+                printOrder();
                 System.out.println("Please pick the ID of the order you want to add to:");
                 int orderId = scanner.nextInt();
-                Orderlist localOrderList = Orders.get(orderId);
+                localOrderList = Orders.get(orderId);
                 localOrderList.orders.add(new Order(MenuItem.getMenuItemById(MenuId), quantity));
                 break;
             default:
-                break;
+                System.out.println("Invalid choice.");
+                return;
         }
 
 
